@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import css from '../components/Home/Home.module.css';
+import css from './page.module.css';
 
 const PageNotFound = () => {
   return (

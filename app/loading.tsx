@@ -1,5 +1,11 @@
+import css from './page.module.css';
+
 const loading = () => {
-  return <p>Loading, please wait...</p>;
+  return (
+    <div className={css.spinner}>
+      <p>Loading, please wait...</p>
+    </div>
+  );
 };
 
 export default loading;
