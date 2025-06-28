@@ -12,16 +12,18 @@ import { FetchNotesResponse } from '../../../../lib/api';
 
 type Props = {
   items: FetchNotesResponse;
+  initialTag?: string;
 };
 
-const NotesClient = ({ items }: Props) => {
+const NotesClient = ({ items, initialTag }: Props) => {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch] = useDebounce(search, 300);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [tag] = useState<string | undefined>(initialTag);
   const { data, isSuccess } = useQuery({
-    queryKey: ['note', debouncedSearch, page],
-    queryFn: () => fetchNotes(debouncedSearch, page),
+    queryKey: ['note', debouncedSearch, page, tag],
+    queryFn: () => fetchNotes(debouncedSearch, page, tag),
     initialData: items,
     refetchOnMount: false,
     placeholderData: keepPreviousData,

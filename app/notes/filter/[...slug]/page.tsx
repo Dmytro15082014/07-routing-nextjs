@@ -14,7 +14,7 @@ const App = async ({ params }: Props) => {
 
   return (
     <>
-      <NotesClient items={data} />
+      <NotesClient items={data} initialTag={tag} />
     </>
   );
 };
