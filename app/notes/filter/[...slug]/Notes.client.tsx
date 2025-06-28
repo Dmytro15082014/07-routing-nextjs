@@ -3,12 +3,12 @@ import css from './page.module.css';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import SearchBox from '../../components/SearchBox/SearchBox';
-import NoteList from '../../components/NoteList/NoteList';
-import Pagination from '../../components/Pagination/Pagination';
-import NoteModal from '../../components/NoteModal/NoteModal';
-import { fetchNotes } from '../../lib/api';
-import { FetchNotesResponse } from '../../lib/api';
+import SearchBox from '../../../../components/SearchBox/SearchBox';
+import NoteList from '../../../../components/NoteList/NoteList';
+import Pagination from '../../../../components/Pagination/Pagination';
+import NoteModal from '../../../../components/NoteModal/NoteModal';
+import { fetchNotes } from '../../../../lib/api';
+import { FetchNotesResponse } from '../../../../lib/api';
 
 type Props = {
   items: FetchNotesResponse;

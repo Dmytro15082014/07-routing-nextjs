@@ -4,12 +4,14 @@ import { type Note, type NoteInput } from '../types/note';
 export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
+  tag?: string;
 }
 
 interface paramsProps {
   page: number;
   perPage: number;
   search?: string;
+  tag?: string;
 }
 
 axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
@@ -21,34 +23,36 @@ const headersToken = {
 
 export async function fetchNotes(
   search: string,
-  page: number
+  page: number,
+  tag?: string | null
 ): Promise<FetchNotesResponse> {
   const params: paramsProps = {
     page,
     perPage: 12,
   };
-  if (search.trim()) {
-    params.search = search;
-  }
-  const res = await axios.get<FetchNotesResponse>(`/notes`, {
+
+  if (search.trim()) params.search = search;
+  if (tag && tag.trim() !== '') params.tag = tag;
+
+  const { data } = await axios.get<FetchNotesResponse>(`/notes`, {
     params,
     headers: headersToken,
   });
-  return res.data;
+  return data;
 }
 
 export async function createNote(noteData: NoteInput): Promise<Note> {
-  const res = await axios.post<Note>('/notes', noteData, {
+  const { data } = await axios.post<Note>('/notes', noteData, {
     headers: headersToken,
   });
-  return res.data;
+  return data;
 }
 
 export async function deleteNote(noteId: number): Promise<Note> {
-  const res = await axios.delete<Note>(`/notes/${noteId}`, {
+  const { data } = await axios.delete<Note>(`/notes/${noteId}`, {
     headers: headersToken,
   });
-  return res.data;
+  return data;
 }
 
 export async function fetchNoteById(id: number): Promise<Note> {
