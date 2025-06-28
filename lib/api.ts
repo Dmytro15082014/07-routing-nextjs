@@ -32,7 +32,7 @@ export async function fetchNotes(
   };
 
   if (search.trim()) params.search = search;
-  if (tag && tag.trim() !== '') params.tag = tag;
+  if (tag) params.tag = tag;
 
   const { data } = await axios.get<FetchNotesResponse>(`/notes`, {
     params,

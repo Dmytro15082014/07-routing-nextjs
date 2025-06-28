@@ -7,9 +7,8 @@ type Props = {
 
 const App = async ({ params }: Props) => {
   const { slug } = await params;
-
-  const tag = slug[0] !== 'Notes' ? slug[0] : undefined;
-  console.log(tag);
+  const decodeTag = decodeURIComponent(slug?.[0] || '');
+  const tag = decodeTag === 'All notes' ? undefined : slug?.[0];
 
   const data = await fetchNotes('', 1, tag);
 
