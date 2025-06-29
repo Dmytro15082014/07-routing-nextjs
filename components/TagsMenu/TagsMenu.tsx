@@ -1,17 +1,11 @@
 'use client';
 import { useState } from 'react';
 import css from './TagsMenu.module.css';
+import Link from 'next/link';
 
 export const TagsMenu = () => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
-  const allTag = [
-    'All notes',
-    'Todo',
-    'Work',
-    'Personal',
-    'Meeting',
-    'Shopping',
-  ];
+  const allTag = ['All', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
   const handleOpenMenu = () => {
     setIsOpenMenu(!isOpenMenu);
@@ -24,10 +18,10 @@ export const TagsMenu = () => {
       {isOpenMenu && (
         <ul className={css.menuList}>
           {allTag.map(tag => (
-            <li key={tag} className={css.menuItem}>
-              <a href={`/notes/filter/${tag}`} className={css.menuLink}>
+            <li key={tag} className={css.menuItem} onClick={handleOpenMenu}>
+              <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
                 {tag}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
