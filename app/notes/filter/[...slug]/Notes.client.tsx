@@ -6,9 +6,10 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import SearchBox from '../../../../components/SearchBox/SearchBox';
 import NoteList from '../../../../components/NoteList/NoteList';
 import Pagination from '../../../../components/Pagination/Pagination';
-import NoteModal from '../../../../components/NoteModal/NoteModal';
+import Modal from '../../../../components/Modal/Modal';
 import { fetchNotes } from '../../../../lib/api';
 import { FetchNotesResponse } from '../../../../lib/api';
+import NoteForm from '@/components/NoteForm/NoteForm';
 
 type Props = {
   items: FetchNotesResponse;
@@ -20,7 +21,7 @@ const NotesClient = ({ items, initialTag }: Props) => {
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch] = useDebounce(search, 300);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [tag] = useState<string | undefined>(initialTag);
+  const tag = initialTag === 'All Notes' ? undefined : initialTag;
   const { data, isSuccess } = useQuery({
     queryKey: ['note', debouncedSearch, page, tag],
     queryFn: () => fetchNotes(debouncedSearch, page, tag),
@@ -62,7 +63,11 @@ const NotesClient = ({ items, initialTag }: Props) => {
         </button>
       </div>
       {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
-      {isModalOpen && <NoteModal onClose={closeForm} />}
+      {isModalOpen && (
+        <Modal onClose={closeForm}>
+          <NoteForm cancel={closeForm} />
+        </Modal>
+      )}
     </div>
   );
 };
