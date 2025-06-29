@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import css from './NotePreview.module.css';
+import css from '../../../../components/NotePreview/NotePreview.module.css';
 import { Note } from '@/types/note';
 import useEscapeClose from '@/hooks/useEscapeClose';
 
