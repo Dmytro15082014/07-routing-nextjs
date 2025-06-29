@@ -5,7 +5,7 @@ import useEscapeClose from '@/hooks/useEscapeClose';
 
 interface NoteModalProps {
   children: React.ReactNode;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
 export default function Modal({ children, onClose }: NoteModalProps) {
